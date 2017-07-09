@@ -19,6 +19,9 @@ const Search = () => {
   const search = $('<div class="valign-wrapper input-field col s9"></div>');
   const icon = $('<i class="material-icons prefix">search</i>');
   const input = $('<input id="icon_prefix" type="text">');
+  input.on('keyup',(e) => {
+    reRender($(".topics"), input.val());
+  });
   const label= $('<label for="icon_prefix">Buscar...</label>');
 
   search.append(icon);

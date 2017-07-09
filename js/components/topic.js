@@ -18,10 +18,26 @@ const Topic = (data) => {
 
   return topic;
 }
+
 const Topics = (listTopics) => {
   const topics = $('<section class="topics"></section>');
-  listTopics.forEach ((topic) => {
+
+  $.each(listTopics, (index, topic) => {
     topics.append(Topic(topic));
-    });
+  });
+
   return topics
+}
+
+const reRender = (topics, filter, update) => {
+  topics.empty();
+  const filteredTopics = filterByContent(state.topics, filter);
+  
+  if (filteredTopics.length > 0) {
+    $.each(filteredTopics,(index,topic) => {
+      topics.append(Topic(topic));
+    });
+  } else {
+    topics.append($('<p>Tema no encontrado</p>'));
+  }
 }
