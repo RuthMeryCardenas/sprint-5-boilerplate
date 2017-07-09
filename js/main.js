@@ -6,6 +6,7 @@ const state = {
 const render = (root) => {
   root.empty();
   const wrapper = $('<div class="wrapper center-block"></div>');
+  wrapper.append(Header());
   wrapper.append(Topics(state.topics));
   root.append(wrapper);
 }

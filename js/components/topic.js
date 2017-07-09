@@ -2,6 +2,7 @@
 
 const Topic = (data) => {
   const topic = $('<div class="topic row" data-id="' + data.id +'"></div>');
+
   const content = $('<div class="col s4"></div>');
   content.append('<span>' + data.content +'</span>');
 
