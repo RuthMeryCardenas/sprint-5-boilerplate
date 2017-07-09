@@ -8,6 +8,7 @@ const render = (root) => {
   const wrapper = $('<div class="wrapper center-block"></div>');
   wrapper.append(Header());
   wrapper.append(Topics(state.topics));
+  wrapper.append(Modal('newTopic'));
   root.append(wrapper);
 }
 
