@@ -16,6 +16,11 @@ const Topic = (data) => {
   topic.append(author);
   topic.append(responses);
 
+  content.on('click', (e) => {
+    console.log($(e.target));
+    console.log(topic.data('id'));
+    window.location = 'verTopic.html?topic_id=' + topic.data('id');
+  });
   return topic;
 }
 
@@ -32,7 +37,7 @@ const Topics = (listTopics) => {
 const reRender = (topics, filter, update) => {
   topics.empty();
   const filteredTopics = filterByContent(state.topics, filter);
-  
+
   if (filteredTopics.length > 0) {
     $.each(filteredTopics,(index,topic) => {
       topics.append(Topic(topic));
