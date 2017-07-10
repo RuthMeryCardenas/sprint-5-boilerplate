@@ -19,7 +19,6 @@ const postJSON = (partial_url, body, cb) => {
   const url = 'http://examen-laboratoria-sprint-5.herokuapp.com/' + partial_url;
   const xhr = new XMLHttpRequest();
 
-  // xhr.open('POST', 'http://examen-laboratoria-sprint-5.herokuapp.com/topics');
   xhr.open('POST', url);
   xhr.setRequestHeader('Content-Type', 'application/json');
 
