@@ -1,3 +1,60 @@
+'use strict';
+
+const Header = () => {
+  const header = $('<header></header>');
+
+  const title = $('<h2 class="center-align">Foro cool</h2>');
+  header.append(title);
+
+  return header;
+}
+
+const NewResponse = () => {
+  const container_btn = $('<div class="valign-wrapper right-align"></div>');
+  const newResponse_btn = $('<a class="waves-effect waves-teal btn" href="#newResponse">crear respuesta</a>');
+
+  container_btn.append(newResponse_btn);
+  return container_btn;
+}
+
+const Topic = (data) => {
+  const topic = $('<section class="topic" data-id="' + data.id +'"></section>');
+
+  const content = $('<div>' + data.content +'</div>');
+
+  const author = $('<div>Por: </div>');
+  author.append('<span>' + data.author_name +'</span>');
+
+  topic.append(content);
+  topic.append(author);
+
+  return topic;
+}
+
+const Response = (data) => {
+  const response = $('<div class="response" data-id="' + data.id +'"></div>');
+
+  const author = $('<p>Por: </p>');
+  author.append('<span>' + data.author_name +'</span>');
+
+  const content = $('<p>' + data.content +'</p>');
+
+  response.append(author);
+  response.append(content);
+
+  return response;
+}
+
+const Responses = (listResponses) => {
+  const responses = $('<section class="responses"></section>');
+
+  $.each(listResponses, (index, response) => {
+    responses.append(Response(response));
+  });
+
+  return responses;
+}
+
 const Modal = (id) => {
   const modal = $('<div id="' + id + '" class="modal"></div>');
 
@@ -25,7 +82,7 @@ const ModalContent = () => {
 
   const header  = $('<div class="header right-align"></div>');
   const close_btn = $('<a class="waves-effect waves-teal btn-flat"><i class="material-icons">clear</i></a>');
-  const title = $('<h4 class="center-align">Crear un nuevo tema</h4>');
+  const title = $('<h4 class="center-align">Responder este tema</h4>');
   header.append(close_btn);
   header.append(title);
 
@@ -54,13 +111,13 @@ const ModalContent = () => {
         'author_name': user.val(),
         'content': message.val()
       }
-      postJSON('topics', body, _ => {
+      postJSON('topics/' + state.current_topic.id +'/responses', body, _ => {
         user.val('');
         message.val('');
-        getJSON('topics', (err, json) => {
+        getJSON('topics/' + state.current_topic.id + '/responses', (err, json) => {
           if (err) { return console.log(err.message);}
-          state.topics = json;
-          reRender($(".topics"), "");
+          state.responses = json;
+          reRender($('.responses'), state.responses);
         });
       });
     }
@@ -70,8 +127,9 @@ const ModalContent = () => {
     $('#user-name').val('');
     $('#message').val('');
   });
+
   close_btn.on('click', _ => {
-    $('#newTopic').modal('close');
+    $('#newResponse').modal('close');
   });
 
   return content;
@@ -97,4 +155,13 @@ const Message = () => {
   message.append('<label for="message">Mensaje:</label>');
 
   return message;
+}
+
+const reRender = (responses, listResponses) => {
+  responses.empty();
+
+  $.each(listResponses, (index, response) => {
+    responses.append(Response(response));
+  });
+
 }

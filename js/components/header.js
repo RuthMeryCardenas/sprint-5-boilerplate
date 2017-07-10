@@ -9,8 +9,6 @@ const Header = () => {
   const userActions = $('<div class="row valign-wrapper"></div>');
   userActions.append(Search());
   userActions.append(NewTopic());
-
-  header.append(title);
   header.append(userActions);
 
   return header;
