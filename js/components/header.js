@@ -33,7 +33,7 @@ const Search = () => {
 
 const NewTopic = () => {
   const container_btn = $('<div class="col s3"></div>');
-  const newTopic_btn = $('<a class="waves-effect waves-teal btn" href="#newTopic">Crear tema</a>');
+  const newTopic_btn = $('<a class="waves-effect waves-teal btn" href="#newTopic">crear tema</a>');
 
   container_btn.append(newTopic_btn);
   return container_btn;
